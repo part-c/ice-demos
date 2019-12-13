@@ -1,0 +1,7 @@
+//
+// Copyright (c) ZeroC, Inc. All rights reserved.
+//
+
+// Main source
+include ':hello'
+project(':hello').projectDir = new File('hello')

@@ -213,3 +213,5 @@ swift/Carthage
 
 .build
 Package.resolved
+
+.cxx

@@ -1,0 +1,31 @@
+//
+// Copyright (c) ZeroC, Inc. All rights reserved.
+//
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.3'
+    }
+}
+
+subprojects {
+    project.group = "com.zeroc"
+    apply plugin: 'idea'
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+ext {
+    compileSdkVersion = 29
+    minSdkVersion = 24
+    targetSdkVersion = 29
+}
