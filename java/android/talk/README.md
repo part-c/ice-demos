@@ -18,6 +18,6 @@ Android developers:
 
 Refer to the [java README.md](../../README.md) for build instructions.
 
-[1]: https://doc.zeroc.com/display/Ice37/IceBT
-[2]: https://doc.zeroc.com/display/Ice37/Asynchronous+Method+Invocation+%28AMI%29+in+Java
+[1]: https://doc.zeroc.com/display/Ice38/IceBT
+[2]: https://doc.zeroc.com/display/Ice38/Asynchronous+Method+Invocation+%28AMI%29+in+Java
 [3]: https://doc.zeroc.com/ice/3.7/client-server-features/connection-management/bidirectional-connections
