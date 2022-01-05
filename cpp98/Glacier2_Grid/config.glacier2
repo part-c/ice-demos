@@ -3,6 +3,9 @@
 #
 Glacier2.InstanceName=ChannelGlacier2
 
+# 配置Registry的地址(IceGrid配置信息)
+Ice.Default.Locator=ChannelIceGrid/Locator:tcp -p 10032 -h 192.168.2.128
+
 #
 # The client-visible endpoint of Glacier2. This should be an endpoint
 # visible from the public Internet, and it should be secure.
