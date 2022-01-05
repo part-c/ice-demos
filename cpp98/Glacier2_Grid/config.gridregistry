@@ -1,0 +1,42 @@
+# Registry properties
+
+
+# 虽然这里设置了值，但是其实不需要起IceGrid服务
+IceGrid.InstanceName=ChannelIceGrid
+
+# 一个组织只有一个IceGridRegistry服务，假设都是缺省端口：10032, -h 配置ip。
+Ice.Default.Locator=ChannelIceGrid/Locator:tcp -p 10032 -h 192.168.2.128
+
+
+IceGrid.Registry.ReplicaName=Master
+
+# Registry 可以被ice客户端访问的地址
+IceGrid.Registry.Client.Endpoints=tcp -p 10032 -h 192.168.2.128
+
+# Registry 可以被ice服务访问的地址
+IceGrid.Registry.Server.Endpoints=tcp -h 192.168.2.128
+
+IceGrid.Registry.Internal.Endpoints=tcp -h 192.168.2.128
+
+IceGrid.Registry.PermissionsVerifier=ChannelIceGrid/NullPermissionsVerifier
+IceGrid.Registry.AdminPermissionsVerifier=ChannelIceGrid/NullPermissionsVerifier
+IceGrid.Registry.SSLPermissionsVerifier=ChannelIceGrid/NullSSLPermissionsVerifier
+IceGrid.Registry.AdminSSLPermissionsVerifier=ChannelIceGrid/NullSSLPermissionsVerifier
+IceGrid.Registry.Discovery.Interface=127.0.0.1
+
+IceGrid.Registry.LMDB.MapSize=10
+
+# 此目录需要预先手工创建
+IceGrid.Registry.LMDB.Path=deploy/lmdb/registry
+
+# 允许动态注册对象
+IceGrid.Registry.DynamicRegistration=1
+
+IceGrid.Registry.Trace.Node=1
+IceGrid.Registry.Trace.Replica=1
+
+#
+# Dummy username and password for icegridadmin.
+#
+IceGridAdmin.Username=foo
+IceGridAdmin.Password=bar
