@@ -20,7 +20,7 @@ HelloI::sayHelloAsync(int delay,
 {
     if(delay == 0)
     {
-        cout << "Hello World!" << endl;
+        cout << "同步调用：Hello World!" << endl;
         response();
     }
     else

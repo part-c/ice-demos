@@ -1,0 +1,126 @@
+#
+# Set the Glacier2 instance name.
+#
+Glacier2.InstanceName=ChannelGlacier2
+
+#
+# The client-visible endpoint of Glacier2. This should be an endpoint
+# visible from the public Internet, and it should be secure.
+#
+# When no -h <host> option is specified in the endpoints, the default
+# value from the Ice.Default.Host property is used. If this property
+# isn't set, the endpoints will listen on all available network
+# interfaces.
+#
+# Glacier2.Client.Endpoints=tcp -p 4063:ssl -p 4064:ws -p 5063:wss -p 5064
+# 配置使用SSL,ip必须是公网IP
+# Glacier2.Client.Endpoints=ssl -p 10031 -h 192.168.2.128
+
+# 配置使用非SSL,ip必须是公网IP
+Glacier2.Client.Endpoints=tcp -p 10031 -h 192.168.2.128
+
+#
+# The server-visible endpoint of Glacier2. This endpoint is only
+# required if callbacks are needed (leave empty otherwise). This
+# should be an endpoint on an internal network (like 192.168.x.x), or
+# on the loopback, so that the server is not directly accessible from
+# the Internet.
+#
+#服务端需要回调客户端时，才需要配置Glacer2的内网IP
+# Glacier2.Server.Endpoints=tcp -h localhost
+Glacier2.Server.Endpoints=
+
+#
+# The proxy of the session manager.
+#
+# Glacier2会话管理
+# 加载到服务器的适配器中，用于权限验证（只能和指定ip和端口的服务器创建session）
+# Glacier2.SessionManager=ChannelSessionManager:tcp -h 192.168.2.128 -p 10000
+
+#
+# For this demo, we use a custom permissions verifier collocated with
+# the session manager.
+#
+#权限管理，demo不用鉴权
+Glacier2.PermissionsVerifier=ChannelGlacier2/NullPermissionsVerifier
+# 加载到服务器的适配器中，用于权限验证（只能路由到指定ip和端口的服务器）
+# Glacier2.PermissionsVerifier=ChannelSessionVerifier:tcp -h 192.168.2.128 -p 10000
+
+#
+# The timeout for inactive sessions. If any client session is inactive
+# for longer than this value, the session expires and is removed. The
+# unit is seconds.
+#
+# glacier2管理的客户端session的超时时间，当客户端闲置超过这个时间，glacier2将断开和客户端的链接并删除和客户端的session
+Glacier2.SessionTimeout=30
+
+#
+# These two lines instruct Glacier2 to forward contexts both for
+# regular routing, as well as for callbacks (reverse routing).
+#
+Glacier2.Client.ForwardContext=1
+Glacier2.Server.ForwardContext=1
+
+#
+# To prevent Glacier2 from being flooded with requests from or to one
+# particular client, Glacier2 can be configured to sleep for a certain
+# period after all current requests for this client have been
+# forwarded. During this sleep period, new requests for the client are
+# queued. These requests are then all sent once the sleep period is
+# over. The unit is milliseconds.
+#
+Glacier2.Client.SleepTime=500
+Glacier2.Server.SleepTime=500
+
+#
+# Various settings to trace requests, overrides, etc.
+#
+Glacier2.Client.Trace.Request=1
+Glacier2.Server.Trace.Request=1
+Glacier2.Client.Trace.Override=1
+Glacier2.Server.Trace.Override=1
+Glacier2.Client.Trace.Reject=1
+Glacier2.Trace.Session=1
+Glacier2.Trace.RoutingTable=1
+
+#
+# Warn about connection exceptions
+#
+Ice.Warn.Connections=1
+
+#
+# Network Tracing
+#
+# 0 = no network tracing
+# 1 = trace connection establishment and closure
+# 2 = like 1, but more detailed
+# 3 = like 2, but also trace data transfer
+#
+#Ice.Trace.Network=1
+
+#
+# Protocol Tracing
+#
+# 0 = no protocol tracing
+# 1 = trace protocol messages
+#
+#Ice.Trace.Protocol=1
+
+#
+# Security Tracing
+#
+# 0 = no security tracing (default)
+# 1 = trace messages
+#
+#IceSSL.Trace.Security=1
+
+#
+# SSL Configuration
+#
+#Ice.Plugin.IceSSL=IceSSL:createIceSSL
+#IceSSL.DefaultDir=../../../certs
+#IceSSL.CAs=cacert.pem
+#IceSSL.CertFile=server.p12
+#IceSSL.Password=password
+#IceSSL.Keychain=../../../certs/glacier2.keychain
+#IceSSL.KeychainPassword=password

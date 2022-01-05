@@ -28,7 +28,8 @@ int main(int argc, char* argv[])
         // CommunicatorHolder's ctor initializes an Ice communicator,
         // and its dtor destroys this communicator.
         //
-        Ice::CommunicatorHolder ich(argc, argv, "config.server");
+        // Ice::CommunicatorHolder ich(argc, argv, "config.server");
+        Ice::CommunicatorHolder ich("config.server");
         auto communicator = ich.communicator();
 
         ctrlCHandler.setCallback(

@@ -12,7 +12,7 @@ Glacier2.InstanceName=DemoGlacier2
 # isn't set, the endpoints will listen on all available network
 # interfaces.
 #
-Glacier2.Client.Endpoints=tcp -p 4063:ssl -p 4064:ws -p 5063:wss -p 5064
+Glacier2.Client.Endpoints=tcp -p 4063:tcp
 
 #
 # Only listen on the localhost interface by default. You can comment
@@ -59,24 +59,6 @@ Glacier2.SessionTimeout=30
 #
 Glacier2.Filter.Category.Accept=session
 
-#
-# Security Tracing
-#
-# 0 = no security tracing
-# 1 = trace messages
-#
-#IceSSL.Trace.Security=1
-
-#
-# SSL Configuration
-#
-Ice.Plugin.IceSSL=IceSSL:createIceSSL
-IceSSL.DefaultDir=../../../certs
-IceSSL.CAs=cacert.pem
-IceSSL.CertFile=server.p12
-IceSSL.Password=password
-IceSSL.Keychain=../../../certs/glacier2.keychain
-IceSSL.KeychainPassword=password
 
 #
 # IceMX configuration.

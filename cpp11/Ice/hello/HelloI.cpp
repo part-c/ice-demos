@@ -8,13 +8,13 @@
 using namespace std;
 
 void
-HelloI::sayHello(int delay, const Ice::Current&)
+HelloI::sayHello(int delay, const ::std::string data, const Ice::Current&)
 {
     if(delay != 0)
     {
         this_thread::sleep_for(chrono::milliseconds(delay));
     }
-    cout << "Hello World!" << endl;
+    cout << "Hello World:" << data << endl;
 }
 
 void

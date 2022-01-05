@@ -27,8 +27,8 @@ main(int argc, char* argv[])
         // CommunicatorHolder's ctor initializes an Ice communicator,
         // and its dtor destroys this communicator.
         //
-        Ice::CommunicatorHolder ich(argc, argv, "config.client");
-
+        // Ice::CommunicatorHolder ich(argc, argv, "config.client");
+        Ice::CommunicatorHolder ich("config.client");
         //
         // The communicator initialization removes all Ice-related arguments from argc/argv
         //
@@ -56,7 +56,7 @@ void menu();
 int
 run(const shared_ptr<Ice::Communicator>& communicator)
 {
-    auto twoway = Ice::checkedCast<HelloPrx>(
+    auto twoway = Ice::uncheckedCast<HelloPrx>(
         communicator->propertyToProxy("Hello.Proxy")->ice_twoway()->ice_secure(false));
     if(!twoway)
     {
@@ -83,15 +83,15 @@ run(const shared_ptr<Ice::Communicator>& communicator)
             cin >> c;
             if(c == 't')
             {
-                twoway->sayHello(delay);
+                twoway->sayHello(delay, "this is t");
             }
             else if(c == 'o')
             {
-                oneway->sayHello(delay);
+                oneway->sayHello(delay, "this is o");
             }
             else if(c == 'O')
             {
-                batchOneway->sayHello(delay);
+                batchOneway->sayHello(delay, "this is O");
             }
             else if(c == 'd')
             {
@@ -101,7 +101,7 @@ run(const shared_ptr<Ice::Communicator>& communicator)
                 }
                 else
                 {
-                    datagram->sayHello(delay);
+                    datagram->sayHello(delay, "this is d");
                 }
             }
             else if(c == 'D')
@@ -112,7 +112,7 @@ run(const shared_ptr<Ice::Communicator>& communicator)
                 }
                 else
                 {
-                    batchDatagram->sayHello(delay);
+                    batchDatagram->sayHello(delay, "this is D");
                 }
             }
             else if(c == 'f')

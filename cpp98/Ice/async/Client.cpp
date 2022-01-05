@@ -15,6 +15,7 @@ public:
 
     void response()
     {
+        cout << "this is response" << endl;
     }
 
     void exception(const Ice::Exception& ex)

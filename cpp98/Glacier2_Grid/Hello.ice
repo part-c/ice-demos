@@ -8,7 +8,7 @@ module Demo
 {
     interface Hello
     {
-        idempotent void sayHello(int delay, string data);
+        idempotent string getGreeting();
         void shutdown();
     }
 }

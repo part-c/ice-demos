@@ -5,6 +5,8 @@
 #include <Ice/Ice.h>
 #include <Hello.h>
 #include <exception>
+#include <type_traits>
+#include <typeinfo>
 
 using namespace std;
 
@@ -50,7 +52,9 @@ void menu();
 int
 run(const shared_ptr<Ice::Communicator>& communicator)
 {
-    auto hello = Ice::checkedCast<Demo::HelloPrx>(communicator->propertyToProxy("Hello.Proxy"));
+    shared_ptr<Demo::HelloPrx> hello2;
+    shared_ptr<Demo::HelloPrx> hello = Ice::checkedCast<Demo::HelloPrx>(communicator->propertyToProxy("Hello.Proxy"));
+    cout << "type hello:" << typeid(hello).name() << endl;
     if(!hello)
     {
         cerr << "invalid proxy" << endl;
@@ -68,6 +72,7 @@ run(const shared_ptr<Ice::Communicator>& communicator)
             cin >> c;
             if(c == 'i')
             {
+                cout << "客户端同步调用" << endl;
                 hello->sayHello(0);
             }
             else if(c == 'd')
