@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
 
     try
     {
-        // set properties
+        // set properties(AdapterName)
         string key_endpoints = "Hello.Endpoints";
         string value_endpoints = "tcp -h 192.168.2.128 -p 10000";
         Ice::InitializationData initData;

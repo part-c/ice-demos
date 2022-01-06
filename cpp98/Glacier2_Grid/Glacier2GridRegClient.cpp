@@ -14,8 +14,7 @@ class CloseCallbackI : public Ice::CloseCallback
 {
 public:
 
-    virtual void
-    closed(const Ice::ConnectionPtr&)
+    virtual void closed(const Ice::ConnectionPtr&)
     {
         cout << "The Glacier2 session has been destroyed========." << endl;
     }
@@ -80,17 +79,26 @@ int run(const Ice::CommunicatorPtr& communicator, const string& strProxy)
     assert(connection);
     connection->setACM(acmTimeout, IceUtil::None, Ice::HeartbeatAlways);
     connection->setCloseCallback(new CloseCallbackI());
-
-    HelloPrx hello = HelloPrx::checkedCast(communicator->stringToProxy(strProxy));
+    HelloPrx hello = HelloPrx::uncheckedCast(communicator->stringToProxy(strProxy));
     if(!hello)
     {
         cerr << "couldn't find a `::Demo::Hello' object." << endl;
         return 1;
     }
 
-    for(int i = 0; i < 120; ++i) {
-        cout << hello->getGreeting() << endl;   
-        IceUtil::ThreadControl::sleep(IceUtil::Time::milliSeconds(2000));
+    // 保证全部发送成功
+    while(true) {
+        // 异常处理
+        try {
+            for(int i = 0; i < 100; ++i) {
+                cout << "i:" << i << "====" << hello->getGreeting() << endl;   
+                // IceUtil::ThreadControl::sleep(IceUtil::Time::milliSeconds(2000));
+            }
+            break; // 全部发送完成
+        } catch(const Ice::UnknownLocalException& ex) {
+            cout << "ex:" << ex.what() << endl;
+            IceUtil::ThreadControl::sleep(IceUtil::Time::milliSeconds(1000));
+        }
     }
     
     return 0;

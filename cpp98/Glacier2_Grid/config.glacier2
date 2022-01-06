@@ -72,19 +72,24 @@ Glacier2.Server.ForwardContext=1
 # queued. These requests are then all sent once the sleep period is
 # over. The unit is milliseconds.
 #
-Glacier2.Client.SleepTime=500
-Glacier2.Server.SleepTime=500
+# 为了防止Glacier2被来自或发送到某个特定客户端的请求淹没，
+# 可以将Glacier2配置为在该客户端的所有当前请求被转发后休眠一段时间。 
+# 在此休眠期间，客户机的新请求将排队。 一旦休眠期结束，这些请求将全部发送。 单位为毫秒
+# 为了提高发送速度，一般不设置
+#Glacier2.Client.SleepTime=500
+#Glacier2.Server.SleepTime=500
 
 #
 # Various settings to trace requests, overrides, etc.
 #
-Glacier2.Client.Trace.Request=1
-Glacier2.Server.Trace.Request=1
-Glacier2.Client.Trace.Override=1
-Glacier2.Server.Trace.Override=1
+# 设置跟踪日志
+#Glacier2.Client.Trace.Request=1
+#Glacier2.Server.Trace.Request=1
+#Glacier2.Client.Trace.Override=1
+#Glacier2.Server.Trace.Override=1
 Glacier2.Client.Trace.Reject=1
-Glacier2.Trace.Session=1
-Glacier2.Trace.RoutingTable=1
+#Glacier2.Trace.Session=1
+#Glacier2.Trace.RoutingTable=1
 
 #
 # Warn about connection exceptions
