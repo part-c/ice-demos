@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
         initData.properties->setProperty(key_endpoints, value_endpoints);
         string taskIceServantAdapterName = "DefaultTCPAdapter";
         string taskIceServantAdapterId = "icChannelAdapter1";
-        initData.properties->setProperty(taskIceServantAdapterName + ".Endpoints", "tcp -h 192.168.2.128");
+        initData.properties->setProperty(taskIceServantAdapterName + ".Endpoints", "tcp -h localhost");
         initData.properties->setProperty(taskIceServantAdapterName + ".AdapterId", taskIceServantAdapterId);
 
         Ice::CommunicatorHolder ptr_holder_ = Ice::CommunicatorHolder(initData);
