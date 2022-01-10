@@ -31,7 +31,7 @@ Glacier2.Client.Endpoints=tcp -p 10031 -h 192.168.2.128
 #
 #服务端需要回调客户端时，才需要配置Glacer2的内网IP
 # Glacier2.Server.Endpoints=tcp -h localhost
-Glacier2.Server.Endpoints=
+# Glacier2.Server.Endpoints=
 
 #
 # The proxy of the session manager.
@@ -132,3 +132,6 @@ Ice.Warn.Connections=1
 #IceSSL.Password=password
 #IceSSL.Keychain=../../../certs/glacier2.keychain
 #IceSSL.KeychainPassword=password
+
+# 限制消息大小，0或负数表示禁用消息大小限制
+Ice.MessageSizeMax=0

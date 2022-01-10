@@ -40,3 +40,6 @@ IceGrid.Registry.Trace.Replica=1
 #
 IceGridAdmin.Username=foo
 IceGridAdmin.Password=bar
+
+# 限制消息大小，0或负数表示禁用消息大小限制
+Ice.MessageSizeMax=0
