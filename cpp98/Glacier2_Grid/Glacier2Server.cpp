@@ -4,23 +4,25 @@
 
 #include <Ice/Ice.h>
 #include <HelloI.h>
+#include <iostream>
+using namespace std;
 // 自定义Glacier2的鉴权逻辑(默认不鉴权)
-/*
 #include <Glacier2/Glacier2.h>
-class DummyPermissionsVerifierI : public Glacier2::PermissionsVerifier
+class SimplePermissionsVerifierI : public Glacier2::PermissionsVerifier
 {
+private:
+    string password_;
 public:
-
-    virtual bool
-    checkPermissions(const string& userId, const string& password, string&, const Ice::Current&) const
+    SimplePermissionsVerifierI(const string& password):password_(password){}
+    virtual bool checkPermissions(const string& userId, const string& password, string&, 
+        const Ice::Current&) const
     {
         cout << "verified user `" << userId << "' with password `" << password << "'" << endl;
+        if(password_ != password)
+            return false;
         return true;
     }
 };
-*/
-
-using namespace std;
 
 int main(int argc, char* argv[])
 {
@@ -51,8 +53,8 @@ int main(int argc, char* argv[])
         Demo::HelloPtr object = new HelloI("Glacier2 Server Response:");
         ptr_adapter_->add(object, id);
         // 适配器加入Glacier2鉴权逻辑
-        // Glacier2::PermissionsVerifierPtr dpv = new DummyPermissionsVerifierI;
-        // ptr_adapter_->add(dpv, Ice::stringToIdentity("ChannelSessionVerifier"));
+        Glacier2::PermissionsVerifierPtr dpv = new SimplePermissionsVerifierI("123456");
+        ptr_adapter_->add(dpv, Ice::stringToIdentity("ChannelSessionVerifier"));
         // session管理
         // ChatSessionManagerIPtr csm = new ChatSessionManagerI;
         // adapter->add(csm, Ice::stringToIdentity("ChatSessionManager"));

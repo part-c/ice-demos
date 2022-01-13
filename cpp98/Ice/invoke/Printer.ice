@@ -11,7 +11,12 @@ module Demo
         string reason;
     }
 
+    exception SendDataException
+    {
+    }
+
     sequence<string> StringSeq;
+    sequence<byte> bytes;
 
     dictionary<string, string> StringDict;
 
@@ -42,5 +47,8 @@ module Demo
         C getValues(out string str);
         void throwPrintFailure() throws PrintFailure;
         void shutdown();
+
+        ["amd"] idempotent int send(string nodeid, string msgid, bytes data)
+            throws SendDataException;
     }
 }

@@ -82,6 +82,7 @@ menu()
         "8: get values\n"
         "9: throw exception\n"
         "s: shutdown server\n"
+        "i: send bytes to server\n"
         "x: exit\n"
         "?: help\n";
 }
@@ -327,6 +328,35 @@ run(const Ice::CommunicatorPtr& communicator)
             else if(ch == 'x')
             {
                 // Nothing to do.
+            }
+            else if(ch == 'i')
+            {
+                //
+                // Marshal the in parameter.
+                //
+                Ice::ByteSeq inParams, outParams;
+                Ice::OutputStream out(communicator);
+                out.startEncapsulation();
+                Demo::bytes arr;
+                arr.push_back('a');
+                arr.push_back('b');
+                arr.push_back(69);
+                arr.push_back(88);
+                arr.push_back(0x31);
+                out.write(arr);
+                out.endEncapsulation();
+                out.finished(inParams);
+
+                Ice::Context ctx;
+                ctx.insert(std::pair<string, string>("nodeid", "p1"));
+                ctx.insert(std::pair<string, string>("msgid", "msgid1"));
+                //
+                // Invoke operation.
+                //
+                if(!obj->ice_invoke("send", Ice::Normal, inParams, outParams, ctx))
+                {
+                    cout << "Unknown user exception" << endl;
+                }
             }
             else if(ch == '?')
             {

@@ -132,6 +132,25 @@ PrinterI::ice_invoke(const vector<Ice::Byte>& inParams, vector<Ice::Byte>& outPa
     {
         current.adapter->getCommunicator()->shutdown();
     }
+    else if(current.operation == "send")
+    {
+        Ice::Context ctx = current.ctx;
+        string nodeid = ctx["nodeid"];
+        string msgid = ctx["msgid"];
+        cout << "recv from nodeid:" << nodeid << ", msgid:" << msgid << endl;
+        Demo::bytes seq;
+        in.read(seq);
+        cout << "channel sdk byte sequence {";
+        for(Demo::bytes::iterator p = seq.begin(); p != seq.end(); ++p)
+        {
+            if(p != seq.begin())
+            {
+                cout << ", ";
+            }
+            cout << "'" << *p << "'";
+        }
+        cout << "}" << endl;
+    }
     else
     {
         Ice::OperationNotExistException ex(__FILE__, __LINE__);

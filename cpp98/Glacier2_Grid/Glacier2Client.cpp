@@ -62,7 +62,8 @@ int run(const Ice::CommunicatorPtr& communicator, const string& strProxy)
     {
         try
         {
-            session = router->createSession("", "");
+            // 简单权限验证
+            session = router->createSession("", "123456");
             break;
         }
         catch(const Glacier2::PermissionDeniedException& ex)
@@ -73,6 +74,7 @@ int run(const Ice::CommunicatorPtr& communicator, const string& strProxy)
         {
             cout << "cannot create session:\n" << ex.reason << endl;
         }
+        sleep(1);
     }while(!session);
 
     Ice::Int acmTimeout = router->getACMTimeout();
