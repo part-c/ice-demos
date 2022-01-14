@@ -17,10 +17,10 @@ Ice.Default.Locator=ChannelIceGrid/Locator:tcp -p 10032 -h 192.168.2.128
 #
 # Glacier2.Client.Endpoints=tcp -p 4063:ssl -p 4064:ws -p 5063:wss -p 5064
 # 配置使用SSL,ip必须是公网IP
-# Glacier2.Client.Endpoints=ssl -p 10031 -h 192.168.2.128
+Glacier2.Client.Endpoints=ssl -p 10031 -h 192.168.2.128
 
 # 配置使用非SSL,ip必须是公网IP
-Glacier2.Client.Endpoints=tcp -p 10031 -h 192.168.2.128
+# Glacier2.Client.Endpoints=tcp -p 10031 -h 192.168.2.128
 
 #
 # The server-visible endpoint of Glacier2. This endpoint is only
@@ -83,11 +83,11 @@ Glacier2.Server.ForwardContext=1
 # Various settings to trace requests, overrides, etc.
 #
 # 设置跟踪日志
+Glacier2.Client.Trace.Reject=1
 #Glacier2.Client.Trace.Request=1
 #Glacier2.Server.Trace.Request=1
 #Glacier2.Client.Trace.Override=1
 #Glacier2.Server.Trace.Override=1
-Glacier2.Client.Trace.Reject=1
 #Glacier2.Trace.Session=1
 #Glacier2.Trace.RoutingTable=1
 
@@ -125,13 +125,13 @@ Ice.Warn.Connections=1
 #
 # SSL Configuration
 #
-#Ice.Plugin.IceSSL=IceSSL:createIceSSL
-#IceSSL.DefaultDir=../../../certs
-#IceSSL.CAs=cacert.pem
-#IceSSL.CertFile=server.p12
-#IceSSL.Password=password
-#IceSSL.Keychain=../../../certs/glacier2.keychain
-#IceSSL.KeychainPassword=password
+Ice.Plugin.IceSSL=IceSSL:createIceSSL
+IceSSL.DefaultDir=/home/luodahui/core/channel-sdk/ssl/openssl
+IceSSL.CAs=ca.pem
+IceSSL.CertFile=server.pem
+IceSSL.Password=123456
+IceSSL.Keychain=server.key
+IceSSL.KeychainPassword=123456
 
 # 限制消息大小，0或负数表示禁用消息大小限制
 Ice.MessageSizeMax=0

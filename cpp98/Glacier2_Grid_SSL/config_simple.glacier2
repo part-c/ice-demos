@@ -45,9 +45,9 @@ Glacier2.Client.Endpoints=tcp -p 10031 -h 192.168.2.128
 # the session manager.
 #
 #权限管理，demo不用鉴权
-Glacier2.PermissionsVerifier=ChannelGlacier2/NullPermissionsVerifier
-# 加载到服务器的适配器(权限验证)中，用于权限验证（只能路由到指定ip和port的服务器）
-# Glacier2.PermissionsVerifier=ChannelSessionVerifier:tcp -h 192.168.2.128 -p 10000
+# Glacier2.PermissionsVerifier=ChannelGlacier2/NullPermissionsVerifier
+# 加载到服务器的适配器(权限验证)中，用于权限验证（只能路由到指定ip和端口的服务器）
+Glacier2.PermissionsVerifier=ChannelSessionVerifier:tcp -h 192.168.2.128 -p 10000
 
 #
 # The timeout for inactive sessions. If any client session is inactive
